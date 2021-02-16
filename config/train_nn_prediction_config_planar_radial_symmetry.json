@@ -1,0 +1,32 @@
+{
+    "activation": {
+        "function": "relu"
+    },
+    "additional_dense_layer": true,
+    "bias_initializer": {
+        "function": "truncated_normal",
+        "stddev": 0.003
+    },
+    "kernel_initializer": {
+        "function": "truncated_normal",
+        "stddev": 0.003
+    },
+    "preprocess_channel": {
+        "enabled": false,
+        "polynom2_initializers": [0.00, -0.1],
+        "polynom1_initializers": [0.0, 2.05],
+        "bias_initializers": [0.47, -0.42]
+    },
+    "model_arch_name": "planar_radial_symmetry",
+    "quadrant_bias_initializer": {
+        "function": "truncated_normal",
+        "stddev": 0.01234567901
+    },
+    "quadrant_kernel_initializer": {
+        "function": "truncated_normal",
+        "stddev": 0.01234567901
+    },
+    "patch_size": [3, 5, 5],
+    "scale_levels": [[1, 1], [2, 2], [4, 4], [6, 6], [8, 8], [12, 12], [16, 16], [32, 32], [64, 64], [128, 128]],
+    "stencil_channels": 3
+}

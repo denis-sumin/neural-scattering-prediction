@@ -1,0 +1,24 @@
+{
+    "activation": {
+        "function": "relu"
+    },
+    "additional_dense_layer": true,
+    "bias_initializer": {
+        "function": "zeros"
+    },
+    "find_inner_material_voxels": true,
+    "kernel_initializer": {
+        "function": "truncated_normal",
+        "stddev": 0.006
+    },
+    "preprocess_channel": {
+        "enabled": false,
+        "polynom2_initializers": [0.00, -0.1],
+        "polynom1_initializers": [0.0, 2.05],
+        "bias_initializers": [0.47, -0.42]
+    },
+    "model_arch_name": "level_shared",
+    "patch_size": [9, 3, 6],
+    "scale_levels": [[1, 1], [2, 2], [4, 4], [8, 8], [16, 16], [32, 32], [64, 64], [128, 128], [256, 256]],
+    "stencil_channels": 2
+}

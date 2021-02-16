@@ -1,0 +1,23 @@
+{
+    "activation": {
+        "function": "relu"
+    },
+    "bias_initializer": {
+        "function": "truncated_normal",
+        "stddev": 0.004444444444
+    },
+    "kernel_initializer": {
+        "function": "truncated_normal",
+        "stddev": 0.004444444444
+    },
+    "preprocess_channel": {
+        "enabled": false,
+        "polynom2_initializers": [0.00, -0.1],
+        "polynom1_initializers": [0.0, 2.05],
+        "bias_initializers": [0.47, -0.42]
+    },
+    "model_arch_name": "first_baseline",
+    "patch_size": [3, 5, 5],
+    "scale_levels": [[1, 1], [2, 2], [4, 4], [6, 6], [8, 8], [12, 12], [16, 16], [32, 32], [64, 64], [128, 128]],
+    "stencil_channels": 3
+}
