@@ -2,11 +2,12 @@ from functools import reduce
 from operator import mul
 from typing import Dict, Tuple
 
-from nn_rendering_prediction.layers.input_preprocess_channel import InputPreprocessChannel
-from nn_rendering_prediction.models.utils import get_activation, get_initializer
 from tensorflow.keras import backend as K
 from tensorflow.keras.layers import Add, Dense, Input, Lambda, Reshape
 from tensorflow.keras.models import Model
+
+from fabnn.layers.input_preprocess_channel import InputPreprocessChannel
+from fabnn.models.utils import get_activation, get_initializer
 
 
 def make_one_level_model(feature_shape: Tuple, params: Dict):

@@ -2,13 +2,14 @@ from functools import reduce
 from operator import mul
 from typing import Dict
 
-from nn_rendering_prediction.layers.channel_crossing import ChannelCrossing
-from nn_rendering_prediction.layers.euclidian_distance_channel import EuclidianDistanceChannel
-from nn_rendering_prediction.layers.input_preprocess_channel import InputPreprocessChannel
-from nn_rendering_prediction.models.utils import get_activation, get_initializer
 from tensorflow.keras import backend as K
 from tensorflow.keras.layers import Add, Concatenate, Dense, Input, Lambda, Reshape
 from tensorflow.keras.models import Model
+
+from fabnn.layers.channel_crossing import ChannelCrossing
+from fabnn.layers.euclidian_distance_channel import EuclidianDistanceChannel
+from fabnn.layers.input_preprocess_channel import InputPreprocessChannel
+from fabnn.models.utils import get_activation, get_initializer
 
 
 def get_octants(input_):

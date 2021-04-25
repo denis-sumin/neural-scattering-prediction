@@ -4,10 +4,10 @@ import struct
 from typing import Iterable, Mapping, Optional, Sequence, Tuple
 
 import numpy
-import utils.mitsuba
 
 from fabnn.materials import Material
 from fabnn.utils import ensure_dir
+from fabnn.utils.mitsuba import label_grid_to_mitsuba_volgrid
 
 
 class LabelGrid:
@@ -210,12 +210,8 @@ class LabelGrid:
         channel_idx: int,
         max_density: float,
     ):
-        utils.mitsuba.label_grid_to_mitsuba_volgrid(
-            volgrid_albedo_filepath, self, albedo_label_to_value_map
-        )
-        utils.mitsuba.label_grid_to_mitsuba_volgrid(
-            volgrid_density_filepath, self, density_label_to_value_map
-        )
+        label_grid_to_mitsuba_volgrid(volgrid_albedo_filepath, self, albedo_label_to_value_map)
+        label_grid_to_mitsuba_volgrid(volgrid_density_filepath, self, density_label_to_value_map)
 
     def world_to_index(self, coord_w: Iterable[float]) -> Tuple[int, int, int]:
         """

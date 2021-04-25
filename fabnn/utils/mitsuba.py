@@ -3,7 +3,8 @@ import struct
 from typing import Mapping
 
 import numpy
-from utils import ensure_dir
+
+from fabnn.utils import ensure_dir
 
 
 def write_mitsuba_vol_file_header(

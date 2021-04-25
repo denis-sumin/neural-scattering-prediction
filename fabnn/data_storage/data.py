@@ -14,16 +14,16 @@ from typing import Dict, Optional, Tuple
 import numpy
 import pandas as pd
 import sklearn
-from downscale import generate_scales_sat
-from grid_converter import FloatGridConverterBox
-from sat_tile_tree import SATTileTree, SATTileTree2D
 
 from fabnn.dataset_utils import (
     get_dataset_item_render_path,
     get_dataset_item_volume_path,
     resolve_dataset_item_file_path,
 )
+from fabnn.downscale import generate_scales_sat
+from fabnn.grid_converter import FloatGridConverterBox
 from fabnn.materials import get_correct_labels, populate_materials
+from fabnn.sat_tile_tree import SATTileTree, SATTileTree2D
 from fabnn.summed_area_table import build_volume_sat
 from fabnn.utils import clean_timings_dict, human_size, log_timing, setup_console_logger
 
