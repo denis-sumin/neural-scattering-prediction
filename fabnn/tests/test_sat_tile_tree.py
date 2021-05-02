@@ -21,7 +21,6 @@ class TestSATTileTree(unittest.TestCase):
     def tearDown(self):
         self.testend = timer()
         numpy_size = self.values.size * self.values.itemsize
-        # print("{:.4E}\t{:.4E}\t{}".format(self.buildend - self.buildstart, self.testend - self.buildend, self.id()))
 
         tree_size = self.tree.size()
         tree_node_count = tree_size / 24
@@ -133,7 +132,6 @@ class SparseSubTree(TestSATTileTree):
 class ConstantInnerTree(TestSATTileTree):
     def setUp(self):
         self.values = numpy.random.rand(4, 4, 4, 2)
-        s = self.values.shape
         self.values[1:-1, 1:-1, 1:-1] = 0.0
         self.buildstart = timer()
         self.tree = SATTileTree2D(self.values)
@@ -160,7 +158,6 @@ class ThinSparseSubTree(TestSATTileTree):
 class ThinConstantInnerTree(TestSATTileTree):
     def setUp(self):
         self.values = numpy.random.rand(5, 33, 3, 2)
-        s = self.values.shape
         self.values[1:-1, 1:-1, 1:-1] = 0.0
         self.buildstart = timer()
         self.tree = SATTileTree2D(self.values)

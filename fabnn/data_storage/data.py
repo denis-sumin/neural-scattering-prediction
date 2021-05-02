@@ -637,7 +637,7 @@ class Data(DataInterface):
                         ):
                             if self.verbose_logging:
                                 logger.info("Unloading {}".format(remove_datafile_index))
-                            vol = self.s_b_sat_volumes.pop(remove_datafile_index)
+                            vol = self.s_b_sat_volumes.pop(remove_datafile_index)  # noqa
                             del vol
                         break
                 self.log_timing("__getitem__.2-unload-prev-step-volumes", time() - s)

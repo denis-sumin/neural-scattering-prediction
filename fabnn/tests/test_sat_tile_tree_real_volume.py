@@ -132,7 +132,9 @@ print(len(zyx_positions))
 ts = time()
 a = list(
     map(
-        lambda it: tree.generate_scales(scale_levels_list, patch_size, it[0], it[1], it[2]),
+        lambda it: tree.generate_scales(  # noqa: F821
+            scale_levels_list, patch_size, it[0], it[1], it[2]
+        ),
         zyx_positions,
     )
 )

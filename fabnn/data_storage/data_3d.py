@@ -225,16 +225,10 @@ class Data3D(Data):
                 index_cache_path_old = render_path[:substring_index] + index_cache_path_suffix
             else:
                 raise RuntimeError("Render path does not containt substring render_result")
-            # if filled_path:
-            #     if os.path.exists(index_cache_path_old) and not os.path.exists(index_cache_path):
-            #         os.rename(index_cache_path_old, index_cache_path)
-            # else:
             index_cache_path = index_cache_path_old
 
         label_grid = data_object
         rendering_grid = pyopenvdb.read(render_path, "rendering") if render_path else None
-        # normal_grid = pyopenvdb.read(
-        #     filled_path if filled_path is not None else render_path, 'normalGrid')
         normal_grid = pyopenvdb.read(
             render_path if render_path is not None else filled_path, "normalGrid"
         )

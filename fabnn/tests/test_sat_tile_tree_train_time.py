@@ -2,7 +2,6 @@ import argparse
 import json
 import os
 from collections import defaultdict
-from decimal import Decimal
 from itertools import repeat
 from multiprocessing import cpu_count
 from multiprocessing.dummy import Pool
@@ -118,12 +117,8 @@ def main():
 
     if args.train_patches is None:
         training_patches_number = None
-        validation_patches_number = None
     else:
         training_patches_number = args.train_patches
-        validation_patches_number = int(
-            training_patches_number * (1 - Decimal(str(TRAINING_RATIO)))
-        )
     batch_size = BATCH_SIZE
 
     with open(args.model_config, "r") as json_file:

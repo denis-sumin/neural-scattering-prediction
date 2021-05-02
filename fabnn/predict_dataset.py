@@ -32,7 +32,7 @@ if "CUDA_VISIBLE_DEVICES" not in os.environ:
 
 config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
-# config.log_device_placement = True  # to log device placement (on which device the operation ran)
+# config.log_device_placement = True  # to log device placement (on which device an operation ran)
 sess = tf.compat.v1.Session(config=config)
 tf.compat.v1.keras.backend.set_session(
     sess
@@ -277,7 +277,6 @@ def main():
 
         volume_filename = get_dataset_item_volume_path(dataset_base_dir, dataset_item)
         render_filename = get_dataset_item_render_path(dataset_base_dir, dataset_item)
-
 
         results_data[item_key] = {
             "volume_filename": os.path.abspath(volume_filename),

@@ -14,7 +14,7 @@ if "CUDA_VISIBLE_DEVICES" not in os.environ:
 
 config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
-# config.log_device_placement = True  # to log device placement (on which device the operation ran)
+# config.log_device_placement = True  # to log device placement (on which device an operation ran)
 sess = tf.compat.v1.Session(config=config)
 tf.compat.v1.keras.backend.set_session(
     sess
@@ -101,8 +101,8 @@ def main():
             npz_file = numpy.load(discrete_voxels_file)
             gt_rendering = npz_file["rendered_image"]
             if (
-                gt_rendering == None
-            ):  # when None is loaded from numpy, it is "not None", but "== None"   # noqa
+                gt_rendering == None  # noqa
+            ):  # when None is loaded from numpy, it is "not None", but "== None"
                 gt_rendering = None
         except Exception:
             gt_rendering = None
