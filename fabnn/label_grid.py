@@ -1,13 +1,12 @@
 import gzip
 import os
 import struct
-from typing import Iterable, Mapping, Optional, Sequence, Tuple
+from typing import Iterable, Optional, Sequence, Tuple
 
 import numpy
 
 from fabnn.materials import Material
 from fabnn.utils import ensure_dir
-from fabnn.utils.mitsuba import label_grid_to_mitsuba_volgrid
 
 
 class LabelGrid:
@@ -200,18 +199,6 @@ class LabelGrid:
             f.write(struct.pack("ddd", *bbox_min))
             f.write(struct.pack("ddd", *bbox_max))
             f.write(self.data.tobytes(order="C"))
-
-    def write_mitsuba_vol_file(
-        self,
-        volgrid_albedo_filepath: str,
-        albedo_label_to_value_map: Mapping[int, float],
-        volgrid_density_filepath: str,
-        density_label_to_value_map: Mapping[int, float],
-        channel_idx: int,
-        max_density: float,
-    ):
-        label_grid_to_mitsuba_volgrid(volgrid_albedo_filepath, self, albedo_label_to_value_map)
-        label_grid_to_mitsuba_volgrid(volgrid_density_filepath, self, density_label_to_value_map)
 
     def world_to_index(self, coord_w: Iterable[float]) -> Tuple[int, int, int]:
         """

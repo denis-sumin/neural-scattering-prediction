@@ -55,5 +55,9 @@ ENV LD_LIBRARY_PATH="/usr/local/lib:${LD_LIBRARY_PATH}"
 WORKDIR /project
 
 COPY fabnn fabnn
+COPY pybind11 pybind11
 COPY setup.py setup.py
+COPY third-party/opencv third-party/opencv
 RUN CFLAGS="-O3" CXXFLAGS="-O3" python3 setup.py build_ext -b fabnn
+
+ENV PYTHONPATH=/project

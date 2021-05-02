@@ -21,7 +21,6 @@ from fabnn.dataset_utils import (
     resolve_dataset_item_file_path,
 )
 from fabnn.downscale import generate_scales_sat
-from fabnn.grid_converter import FloatGridConverterBox
 from fabnn.materials import get_correct_labels, populate_materials
 from fabnn.sat_tile_tree import SATTileTree, SATTileTree2D
 from fabnn.summed_area_table import build_volume_sat
@@ -193,9 +192,6 @@ class TreeSAT:
         self.activate_mask = (
             isinstance(self.stencil_channels, Iterable) and "mask" in self.stencil_channels
         )
-        self.activate_distance = (
-            isinstance(self.stencil_channels, Iterable) and "distance" in self.stencil_channels
-        )
 
         s = time()
         self.volume_sb_tree = SATTileTree2D(volume[:, :, :, :2], tile_size, alignment_z_centered)
@@ -213,29 +209,6 @@ class TreeSAT:
                 logger.info("mask_tree size: {}".format(human_size(self.volume_mask_tree.size())))
         else:
             self.volume_mask_tree = None
-
-        if self.activate_distance:
-            converter = FloatGridConverterBox()
-            s = time()
-            distance_field = converter.resampleToNumpy(
-                filled_vdb,
-                "distanceField",
-                label_grid.bbox_min,
-                label_grid.bbox_max,
-                label_grid.voxel_size,
-            )
-            print("distance_field min and max:", distance_field.min(), distance_field.max())
-            log_timing(self.timings, "Resample distanceField", time() - s)
-
-            s = time()
-            self.distance_tree = SATTileTree(
-                distance_field[..., numpy.newaxis], tile_size, alignment_z_centered
-            )
-            log_timing(self.timings, "Create distance SATTileTree", time() - s)
-            if self.verbose_logging:
-                logger.info(
-                    "distance_tree size: {}".format(human_size(self.distance_tree.size()))
-                )
 
     def get_size(self) -> int:
         size = self.volume_sb_tree.size()

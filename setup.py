@@ -47,25 +47,10 @@ ext_sat_tile_tree = Extension(
     extra_link_args=openmp_link_args([]),
 )
 
-ext_grid_converter = Extension(
-    "grid_converter",
-    sources=[
-        "fabnn/prepare_training_data/grid_converter.cpp",
-    ],
-    include_dirs=[
-        np.get_include(),
-        "pybind11/include",
-        EIGEN_INCLUDE_DIR,
-    ],
-    extra_compile_args=openmp_compile_args(["-std=c++17"]),
-    extra_link_args=openmp_link_args(["-lopenvdb", "-lHalf", "-ltbb"]),
-)
-
 setup(
     name="fabnn",
     ext_modules=[
         ext_downscale,
         ext_sat_tile_tree,
-        ext_grid_converter,
     ],
 )

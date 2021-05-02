@@ -24,8 +24,6 @@ from fabnn.utils import (
     setup_console_logger,
 )
 from fabnn.utils.difference_metrics import get_colormap, get_difference_metric
-from fabnn.utils.report import augment_diff_image
-from fabnn.vdb_view import make_vdb_screenshots
 
 logger = setup_console_logger(__name__)
 
@@ -280,126 +278,11 @@ def main():
         volume_filename = get_dataset_item_volume_path(dataset_base_dir, dataset_item)
         render_filename = get_dataset_item_render_path(dataset_base_dir, dataset_item)
 
-        if dataset_item["is_2D"]:
-            output_prediction_path = os.path.join(
-                results_output_directory, "{}.{}".format(item_key, "exr")
-            )
-            render_view_filenames = [os.path.abspath(render_filename)]
-            diff_view_filenames = []
-            prediction_view_filenames = [output_prediction_path]
-        else:  # dataset_item is 3D
-            output_prediction_path = os.path.join(
-                results_output_directory, "{}.{}".format(item_key, "vdb")
-            )
-            base_diff_RG_preview_filename = os.path.join(
-                results_output_directory, item_key + "_diff_view_RG.png"
-            )
-            base_diff_dE_preview_filename = os.path.join(
-                results_output_directory, item_key + "_diff_view_dE.png"
-            )
-            base_prediction_preview_filename = os.path.join(
-                results_output_directory, item_key + "_prediction_view.png"
-            )
-            base_render_preview_filename = os.path.join(
-                results_output_directory, item_key + "_render_view.png"
-            )
-
-            previews = dataset_item.get("previews", [])
-            if not previews:
-                previews = [
-                    {
-                        "direction": [-1, -1, -1],
-                        "position": [-1, -1, -1],
-                    }
-                ]
-
-            diff_RG_view_filenames = [
-                base_diff_RG_preview_filename.replace(".png", "_{}.png".format(idx))
-                for idx in range(len(previews))
-            ]
-            diff_dE_view_filenames = [
-                base_diff_dE_preview_filename.replace(".png", "_{}.png".format(idx))
-                for idx in range(len(previews))
-            ]
-            prediction_view_filenames = [
-                base_prediction_preview_filename.replace(".png", "_{}.png".format(idx))
-                for idx in range(len(previews))
-            ]
-            render_view_filenames = [
-                base_prediction_preview_filename.replace(".png", "_{}.png".format(idx))
-                for idx in range(len(previews))
-            ]
-            preview_files_exist = True
-            for file_path in (
-                diff_RG_view_filenames
-                + diff_dE_view_filenames
-                + prediction_view_filenames
-                + render_view_filenames
-            ):
-                if not os.path.exists(file_path):
-                    preview_files_exist = False
-
-            if not preview_files_exist or item_key in predicted_items:
-                diff_RG_view_filenames = make_vdb_screenshots(
-                    filename=output_prediction_path,
-                    gridname="diff_red-green",
-                    views=previews,
-                    background=0,
-                    output_base_filename=base_diff_RG_preview_filename,
-                )
-                diff_dE_view_filenames = make_vdb_screenshots(
-                    filename=output_prediction_path,
-                    gridname="diff_dE2000_20max",
-                    views=previews,
-                    background=0,
-                    output_base_filename=base_diff_dE_preview_filename,
-                )
-                prediction_view_filenames = make_vdb_screenshots(
-                    filename=output_prediction_path,
-                    gridname="prediction",
-                    views=previews,
-                    background=224,
-                    output_base_filename=base_prediction_preview_filename,
-                )
-                render_view_filenames = make_vdb_screenshots(
-                    filename=render_filename,
-                    gridname="rendering",
-                    views=previews,
-                    background=224,
-                    output_base_filename=base_render_preview_filename,
-                )
-
-                def IO_and_augment(path, metric, difference_values, difference_values_range):
-                    img = read_image(path)
-                    new_path = path.replace(".png", "_hist.png")
-                    augment_diff_image(
-                        img,
-                        metric,
-                        output_path=new_path,
-                        difference_values=difference_values,
-                        difference_values_range=difference_values_range,
-                    )
-                    return new_path
-
-                diff_RG_view_filenames = [
-                    IO_and_augment(
-                        p, "error", diff, (-1 / diff_vis_scaling, 1 / diff_vis_scaling)
-                    )
-                    for p in diff_RG_view_filenames
-                ] + diff_RG_view_filenames
-                diff_dE_view_filenames = [
-                    IO_and_augment(p, "ciede2000", diff_dE, (0, diff_dE_vis_scaling))
-                    for p in diff_dE_view_filenames
-                ] + diff_dE_view_filenames
 
         results_data[item_key] = {
             "volume_filename": os.path.abspath(volume_filename),
             "render_filename": os.path.abspath(render_filename),
-            "render_view_filenames": render_view_filenames,
             "prediction_filename": os.path.abspath(output_prediction_path),
-            "prediction_view_filenames": prediction_view_filenames,
-            "diff_RG_filenames": diff_RG_view_filenames,
-            "diff_dE_filenames": diff_dE_view_filenames,
             "base_image_name": dataset_item.get("base_image_name", ""),
             "rmse_linear": rmse_linear,
             "rmse_srgb": rmse_srgb,
