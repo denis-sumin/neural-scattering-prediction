@@ -35,5 +35,25 @@ To run [our viewer](vdb_view.py) of OpenVDB volumes, one should install on the h
 * OpenVDB with Python bindings, version >= 5.0
 * [nanogui](https://github.com/wjakob/nanogui) (old version, it will **not work** with the [new nanogui](https://github.com/mitsuba-renderer/nanogui) out of the box)
 
+#### Installing on a Ubuntu 20.04 LTS machine:
+
+```
+sudo apt install git python3-openvdb cmake xorg-dev libglu1-mesa-dev python3-dev python3-pip python3-venv
+python3 -m venv --system-site-packages ~/nanogui_venv/
+
+git clone --recursive https://github.com/wjakob/nanogui
+mkdir nanogui/build && cd nanogui/build && cmake -DCMAKE_INSTALL_PREFIX="~/nanogui_venv/" ..
+make install
+
+ln -s ~/nanogui_venv/lib/nanogui.cpython-38-x86_64-linux-gnu.so ~/nanogui_venv/lib/python3.8/site-packages
+export LD_LIBRARY_PATH=~/nanogui_venv/lib/
+
+source ~/nanogui_venv/bin/activate
+pip3 install pyscreenshot numpy
+
+python3 vdb_view.py --help <my_openvdb_file.py>
+```
+**Known issues**:
+ - jemalloc: [Fixed](https://jira.aswf.io/browse/OVDB-134) using `LD_PRELOAD=/path/to/libjemalloc.so python3`
 
 ## Cite
