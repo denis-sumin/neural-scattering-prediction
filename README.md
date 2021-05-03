@@ -1,6 +1,14 @@
-# neural-scattering-prediction
+![Teaser](teaser.jpg)
+*Teaser:* We propose a neural scattering compensation for 3D color printing. Comparing to a method which uses noise-free Monte Carlo
+simulation our technique achieves 300× speedup in the above case while providing the same quality.
+# Neural Scattering Prediction
 
 This repository contains code and dataset for the paper [Neural Acceleration of Scattering-Aware Color 3D Printing](https://cgg.mff.cuni.cz/publications/neural-acceleration-of-scattering-aware-color-3d-printing/). 
+
+It contains a tensorflow v1 implementation of Radiance Predicting Neural Networks (RPNN's) that is trained on a dataset of volume-to-surface-appearance pairs.
+These pairs are obtained via 512spp Monte Carlo reference renderings of a set of generated colored volumes that are halftoned to 5 discrete scattering materials.
+
+The network is trained on scattering and absorption coefficients and outputs a single-color-channel radiance value as output.
 
 ## Dataset
 
