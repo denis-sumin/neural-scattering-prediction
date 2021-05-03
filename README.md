@@ -1,6 +1,6 @@
 # neural-scattering-prediction
 
-This repository contains code and dataset for the paper XXX. 
+This repository contains code and dataset for the paper [Neural Acceleration of Scattering-Aware Color 3D Printing](https://cgg.mff.cuni.cz/publications/neural-acceleration-of-scattering-aware-color-3d-printing/). 
 
 ## Dataset
 
@@ -30,10 +30,10 @@ To train a model, run:
 
 ### VDB Viewer
 
-To run our viewer of OpenVDB volumes, one should install on the host machine:
+To run [our viewer](vdb_view.py) of OpenVDB volumes, one should install on the host machine:
 
 * OpenVDB with Python bindings, version >= 5.0
-* nanogui
+* [nanogui](https://github.com/wjakob/nanogui) (old version, it will **not work** with the [new nanogui](https://github.com/mitsuba-renderer/nanogui) out of the box)
 
 
 ## Cite
