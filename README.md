@@ -51,7 +51,7 @@ export LD_LIBRARY_PATH=~/nanogui_venv/lib/
 source ~/nanogui_venv/bin/activate
 pip3 install pyscreenshot numpy
 
-python3 vdb_view.py --help <my_openvdb_file.py>
+python3 vdb_view.py --help <my_openvdb_file.vdb>
 ```
 **Known issues**:
  - jemalloc: [Fixed](https://jira.aswf.io/browse/OVDB-134) using `LD_PRELOAD=/path/to/libjemalloc.so python3`
