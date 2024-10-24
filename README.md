@@ -12,7 +12,7 @@ The network is trained on scattering and absorption coefficients and outputs a s
 
 ## Dataset
 
-[https://fabnn.mpi-inf.mpg.de/datasets/2020-02-3D+thin-generated.zip](https://fabnn.mpi-inf.mpg.de/datasets/2020-02-3D+thin-generated.zip)
+[2020-02-3D+thin-generated.zip](https://edmond.mpg.de/file.xhtml?fileId=261786&version=1.0)
 
 To download, unzip, remove the downloaded file, do:
 
@@ -26,10 +26,10 @@ rm 2020-02-3D+thin-generated.zip
 
 | Paper model name          | Model ID | URL
 | ------------------------- | :------: | -----------
-| Baseline                  | m24      | https://fabnn.mpi-inf.mpg.de/models/2020_05_21_m24-3d-2ch_dataset_2020-02-3D+thin-generated.zip
-| with ≡L (levels-sharing)  | m33      | https://fabnn.mpi-inf.mpg.de/models/2020_05_21_m33-3d-2ch_dataset_2020-02-3D+thin-generated.zip
-| with ≡O (octants-sharing) | m30      | https://fabnn.mpi-inf.mpg.de/models/2020_05_21_m30-3d-2ch_dataset_2020-02-3D+thin-generated.zip
-| with ≡L and ≡O (ours)     | m34      | https://fabnn.mpi-inf.mpg.de/models/2020_05_21_m34-3d-2ch_dataset_2020-02-3D+thin-generated.zip
+| Baseline                  | m24      | [2020_05_21_m24-3d-2ch_dataset_2020-02-3D+thin-generated.zip](https://edmond.mpg.de/file.xhtml?fileId=261785&version=1.0)
+| with ≡L (levels-sharing)  | m33      | [2020_05_21_m33-3d-2ch_dataset_2020-02-3D+thin-generated.zip](https://edmond.mpg.de/file.xhtml?fileId=261784&version=1.0)
+| with ≡O (octants-sharing) | m30      | [2020_05_21_m30-3d-2ch_dataset_2020-02-3D+thin-generated.zip](https://edmond.mpg.de/file.xhtml?fileId=261787&version=1.0)
+| with ≡L and ≡O (ours)     | m34      | [2020_05_21_m34-3d-2ch_dataset_2020-02-3D+thin-generated.zip](https://edmond.mpg.de/file.xhtml?fileId=261788&version=1.0)
 
 ## Install
 
